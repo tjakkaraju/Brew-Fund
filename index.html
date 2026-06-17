@@ -168,6 +168,16 @@ tr:hover td{background:rgba(255,255,255,0.015);}
   <div class="nt" id="tab-watchlist" onclick="sw('watchlist','tab-watchlist')">Watchlist</div>
 </div>
 
+<div id="alpaca-connect" style="display:none;padding:10px 24px;background:rgba(201,168,76,0.06);border-bottom:1px solid var(--border);">
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px;">
+    <span style="color:var(--gold);letter-spacing:0.05em;">CONNECT ALPACA (paper) — loads live values · key stays in THIS browser only, never saved to the page:</span>
+    <input id="ac-key" type="text" placeholder="API Key (PK...)" autocomplete="off" spellcheck="false" style="background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:6px 9px;border-radius:4px;font-family:var(--mono);font-size:11px;width:190px;">
+    <input id="ac-sec" type="password" placeholder="Secret Key" autocomplete="off" spellcheck="false" style="background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:6px 9px;border-radius:4px;font-family:var(--mono);font-size:11px;width:190px;">
+    <button onclick="connectAlpaca()" style="background:var(--gold);color:#000;border:0;padding:6px 14px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">CONNECT</button>
+    <span id="ac-msg" style="color:var(--muted);"></span>
+  </div>
+</div>
+
 <!-- COMMAND -->
 <div class="panel active" id="p-command">
   <div class="ks">
@@ -513,7 +523,7 @@ Your Anthropic API key will be prompted on first message.</div>
       </div></div>
       <div class="box"><div class="bh">What makes Brew Capital different</div><div style="padding:13px;font-size:13px;line-height:1.7;">
         <strong style="color:var(--gold2);">Signal convergence</strong> — Multiple independent signals must confirm the same position simultaneously. Rare and powerful when it happens.<br><br>
-        <strong style="color:var(--gold2);">Geopolitical intelligence</strong> — 277-mind analysis includes dedicated geopolitical cascade mapping. Five levels of consequence modeling per event.<br><br>
+        <strong style="color:var(--gold2);">Geopolitical intelligence</strong> — 278-mind analysis includes dedicated geopolitical cascade mapping. Five levels of consequence modeling per event.<br><br>
         <strong style="color:var(--gold2);">Minority-owned systematic</strong> — Very few Indian-American-led systematic hedge funds at seed stage. Opens emerging manager programs, diversity mandates, and mission-aligned capital.
       </div></div>
     </div>
@@ -600,17 +610,17 @@ Your Anthropic API key will be prompted on first message.</div>
     <div class="bi"><div class="bi-n">08</div><div class="bi-body"><div class="bi-name">W4 IR Writing Intelligence prompt</div><div class="bi-sub">Cialdini + Voss + Van Edwards + Ogilvy loaded in W4 Claude node.</div></div><span class="tag tg-todo">TIER 2</span></div>
     <div class="bi"><div class="bi-n">09</div><div class="bi-body"><div class="bi-name">All 20 minority / diverse manager applications</div><div class="bi-sub">NYC, MassPRIM, CalPERS, LACERA, Illinois TRS, HFR, Preqin, eVestment...</div></div><span class="tag tg-todo">TIER 2</span></div>
   </div>
-  <div class="sh">Completed today — April 2, 2026</div>
+  <div class="sh">Completed — April 2 milestones</div>
   <div class="box">
     <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">APEX OS v7.1.1 — 278 minds built</div><div class="bi-sub">Fast-mode, faith layer, Mind 278 Portfolio Architect, VIX regime science, whipsaw protection</div></div><span class="tag tg-done">DONE</span></div>
     <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W23 → split into W23A / W23B / W23C (LIVE)</div><div class="bi-sub">Router → Chat → Execution. 6 paths wired + verified. Auto-executes 9+/14 via the W23C conviction gate. Old W23 kept as restore point.</div></div><span class="tag tg-done">DONE</span></div>
     <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">9-position paper portfolio executed in Alpaca</div><div class="bi-sub">GLD, XLV, LVHD, XLI, XLP, XLE, XLK, PSQ, TAIL — all live paper</div></div><span class="tag tg-done">DONE</span></div>
     <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W0 Kill Switch — wired all workflows</div><div class="bi-sub">One subworkflow. KILLSWITCH halts everything. RESUME restores all.</div></div><span class="tag tg-done">DONE</span></div>
     <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W3 — APEX Grandmaster VIX intelligence</div><div class="bi-sub">No more position halving. Every VIX alert now sends full 278-mind regime analysis.</div></div><span class="tag tg-done">DONE</span></div>
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W4 — 3x daily triggers 8AM/11AM/2PM CST</div><div class="bi-sub">IR emails firing 3x daily to pipeline. Proton SMTP live.</div></div><span class="tag tg-done">DONE</span></div>
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">True autonomous execution — RTX bought without manual BUY</div><div class="bi-sub">APEX scored RTX 11/14, AUTO_EXECUTE triggered, Alpaca filled. Zero manual input.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">04</div><div class="bi-body"><div class="bi-name">W4 — 3x daily triggers + Proton SMTP</div><div class="bi-sub">Still pending — Proton SMTP not yet wired in W4; 3x daily triggers not yet built. See Intelligence tab.</div></div><span class="tag tg-fix">PENDING</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Autonomous execution — W23C conviction gate live</div><div class="bi-sub">9+/14 signals auto-execute via Alpaca paper with no manual BUY. Verified on live paper fills.</div></div><span class="tag tg-done">DONE</span></div>
     <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Form D filed — SEC accepted</div><div class="bi-sub">Accession 0002124864-26-000002 | Rule 506(b) | April 1, 2026</div></div><span class="tag tg-done">DONE</span></div>
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Command Center v3.0 — 9 tabs + auto-exec + options branch</div><div class="bi-sub">Command, Approvals, Portfolio, Grandmaster, Intelligence, School, Fund, Commands, Build List</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Command Center v3.0 — 11 tabs + auto-exec + options branch</div><div class="bi-sub">Command, To-Do, Approvals, Portfolio, Grandmaster, Intelligence, School, Fund, Commands, Build List, Watchlist</div></div><span class="tag tg-done">DONE</span></div>
   </div>
 </div>
 
@@ -740,6 +750,9 @@ async function fetchAlpacaData() {
     document.getElementById('last-update').textContent = 'Last update: ' + new Date().toLocaleTimeString('en-US', {timeZone:'America/Chicago', hour:'2-digit', minute:'2-digit', second:'2-digit'}) + ' CST';
   } catch(e) {
     console.error('Alpaca fetch error:', e);
+    var lu=document.getElementById('last-update'); if(lu) lu.textContent='Live fetch failed — this public page may be CORS-blocked from Alpaca. The n8n feed path avoids this.';
+    var m=document.getElementById('ac-msg'); if(m) m.textContent='Fetch failed (often CORS on a public page). The n8n feed avoids this entirely.';
+    showConnect(true);
   }
 }
 
@@ -1057,15 +1070,27 @@ async function fetchFeed(){
   }catch(e){ console.error('Feed fetch error:',e); return false; }
 }
 
+function showConnect(show){ var b=document.getElementById('alpaca-connect'); if(b) b.style.display = show ? 'block' : 'none'; }
+function connectAlpaca(){
+  var k=document.getElementById('ac-key'), s=document.getElementById('ac-sec'), m=document.getElementById('ac-msg');
+  var kv=k?k.value.trim():'', sv=s?s.value.trim():'';
+  if(!kv||!sv){ if(m) m.textContent='Enter both the API key and the secret, then tap CONNECT.'; return; }
+  ALPK=kv; ALPS=sv;
+  try{ sessionStorage.setItem('bc_alpaca_key',ALPK); sessionStorage.setItem('bc_alpaca_secret',ALPS); }catch(e){}
+  if(m) m.textContent='Connecting…';
+  showConnect(false);
+  fetchAlpacaData();
+  if(!refreshInterval) refreshInterval=setInterval(fetchAlpacaData,60000);
+}
+
 function init(){
   if(FEED_WEBHOOK){
     fetchFeed(); if(!refreshInterval) refreshInterval=setInterval(fetchFeed,60000);
   } else {
     ALPK = sessionStorage.getItem('bc_alpaca_key') || '';
     ALPS = sessionStorage.getItem('bc_alpaca_secret') || '';
-    if(!ALPK){ ALPK = prompt('No secure feed connected yet. Enter Alpaca Paper API Key (PK...) to load live numbers in-browser, or Cancel to leave them blank:') || ''; if(ALPK) sessionStorage.setItem('bc_alpaca_key', ALPK); }
-    if(ALPK && !ALPS){ ALPS = prompt('Enter Alpaca Paper Secret Key:') || ''; if(ALPS) sessionStorage.setItem('bc_alpaca_secret', ALPS); }
     if(ALPK && ALPS){ fetchAlpacaData(); if(!refreshInterval) refreshInterval = setInterval(fetchAlpacaData, 60000); }
+    else { showConnect(true); }
   }
   try{ loadApprovals(); setInterval(loadApprovals,120000); }catch(e){}
 }
