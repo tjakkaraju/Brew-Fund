@@ -146,7 +146,7 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 
 <div class="topbar">
   <div class="brand">BREW CAPITAL LP <em>/ COMMAND CENTER v3.0</em></div>
-  <div class="vix-pill" style="border-color:rgba(46,204,113,0.5);color:#2ecc71;background:rgba(46,204,113,0.07);">VIX ~19 — NORMAL · full size</div>
+  <div class="vix-pill" style="border-color:rgba(46,204,113,0.5);color:#2ecc71;background:rgba(46,204,113,0.07);">VIX ~16 — NORMAL · full size</div>
   <div class="topbar-right">
     <div class="fd">FORM D FILED</div>
     <div class="live-dot"></div>
@@ -171,14 +171,14 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 <!-- COMMAND -->
 <div class="panel active" id="p-command">
   <div class="ks">
-    <div><div class="ks-l">Kill Switch — W0</div><div class="ks-st" id="ks-st">SYSTEMS ARMED — 34+ WORKFLOWS RUNNING — W0 WIRED INTO ALL EXECUTION PATHS</div></div>
+    <div><div class="ks-l">Kill Switch — W0</div><div class="ks-st" id="ks-st">SYSTEMS ARMED — 39 WORKFLOWS RUNNING — W0 WIRED INTO ALL EXECUTION PATHS</div></div>
     <div style="display:flex;gap:8px;"><button class="btn-halt" onclick="killIt()">HALT ALL</button><button class="btn-resume" id="btn-resume" onclick="resumeIt()">RESUME</button></div>
   </div>
   <div class="g4">
-    <div class="sc"><div class="sc-l">NAV — Paper</div><div class="sc-v gold" id="nav-val">$99,315</div><div class="sc-s">Alpaca paper — live</div></div>
-    <div class="sc"><div class="sc-l">Cash</div><div class="sc-v" id="cash-val">$40,034</div><div class="sc-s">40% cash · NORMAL</div></div>
-    <div class="sc"><div class="sc-l">Daily P&amp;L</div><div class="sc-v up" id="daily-pnl">+$462</div><div class="sc-s" id="port-count">17 positions open</div></div>
-    <div class="sc"><div class="sc-l">Buying Power</div><div class="sc-v" id="bp-val">$167,693</div><div class="sc-s">Alpaca paper</div></div>
+    <div class="sc"><div class="sc-l">NAV — Paper</div><div class="sc-v gold" id="nav-val">—</div><div class="sc-s">connect feed / Alpaca</div></div>
+    <div class="sc"><div class="sc-l">Cash</div><div class="sc-v" id="cash-val">—</div><div class="sc-s">connect feed / Alpaca</div></div>
+    <div class="sc"><div class="sc-l">Daily P&amp;L</div><div class="sc-v" id="daily-pnl">—</div><div class="sc-s" id="port-count">— positions</div></div>
+    <div class="sc"><div class="sc-l">Buying Power</div><div class="sc-v" id="bp-val">—</div><div class="sc-s">connect feed / Alpaca</div></div>
   </div>
   <div class="g4">
     <div class="sc"><div class="sc-l">Workflows live</div><div class="sc-v gold">39</div><div class="sc-s">44 total · 5 inactive/restore</div></div>
@@ -276,7 +276,7 @@ tr:hover td{background:rgba(255,255,255,0.015);}
   </div>
   <div class="sh">Claude — next session (needs n8n write tools)</div>
   <div class="box">
-    <div class="bi"><div class="bi-n">06</div><div class="bi-body"><div class="bi-name">Build secure feed webhook (dashboard ← private sheet)</div><div class="bi-sub">n8n reads the private sheet server-side, returns curated JSON. Keeps master private. Fixes Watchlist + Approvals.</div></div><span class="tag tg-fix">BLOCKED</span></div>
+    <div class="bi"><div class="bi-n">06</div><div class="bi-body"><div class="bi-name">Build secure feed webhook (dashboard ← private sheet)</div><div class="bi-sub">n8n reads the private sheet server-side, returns curated JSON. Keeps master private. Fixes Watchlist + Approvals + live NAV.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">07</div><div class="bi-body"><div class="bi-name">Build AGENT_LOG store + LOG-OUTPUT sub-workflow</div><div class="bi-sub">Every agent appends its full output.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">08</div><div class="bi-body"><div class="bi-name">Give W23B + W10 a read-AGENT_LOG step</div><div class="bi-sub">Lets Grandmaster reason across all agents.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">09</div><div class="bi-body"><div class="bi-name">Fill-reconciliation — catch unlogged manual trades</div><div class="bi-sub">Compare Alpaca activities vs TRACK_RECORD, append any missing + flag.</div></div><span class="tag tg-fix">BLOCKED</span></div>
@@ -300,7 +300,7 @@ tr:hover td{background:rgba(255,255,255,0.015);}
   <div class="ac">
     <div class="ac-t">IR Email — 8:00 AM — Touch 1</div>
     <div class="ac-s">Systematic quant emerging manager — Brew Capital LP</div>
-    <div class="ac-m">To: Apollo prospect · Via: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dbdcc4d7c1c6f2d0c0d7c5d1d3c2dbc6d3dedec29cd1dddf">[email&#160;protected]</a> · W4 8AM trigger</div>
+    <div class="ac-m">To: prospect · Via: invest@brewcapitallp.com · W4 8AM trigger</div>
     <div class="ac-body">W4 Proton SMTP not yet wired. Full email body, Writing Intelligence score, AI tells count, and 506(b) flags will show here automatically after W4 fix. Until then review drafts in @BrewCapitalBot.</div>
     <div class="ac-sc"><div class="ac-score warn">W4 FIX NEEDED</div><div class="ac-score warn">PROTON SMTP PENDING</div><div class="ac-score">3X DAILY NOT LIVE</div></div>
     <div class="ac-btns"><button class="btn-y" onclick="approve(this,'IR Email')">Y — APPROVE &amp; SEND</button><button class="btn-n" onclick="reject(this)">N — REJECT &amp; REGEN</button></div>
@@ -325,19 +325,19 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 <!-- PORTFOLIO -->
 <div class="panel" id="p-portfolio">
   <div class="g4">
-    <div class="sc"><div class="sc-l">Deployed</div><div class="sc-v" id="port-nav">$33,231</div><div class="sc-s">33.1% of NAV</div></div>
-    <div class="sc"><div class="sc-l">Cash</div><div class="sc-v" id="port-cash">$40,034</div><div class="sc-s">STRESS — deploy selectively</div></div>
-    <div class="sc"><div class="sc-l">Daily P&amp;L</div><div class="sc-v up" id="port-daypnl">+$462</div><div class="sc-s">paper — Day P&amp;L live</div></div>
-    <div class="sc"><div class="sc-l">Positions</div><div class="sc-v" id="port-positions">17</div><div class="sc-s">Alpaca paper | Auto-exec LIVE</div></div>
+    <div class="sc"><div class="sc-l">Deployed</div><div class="sc-v" id="port-nav">—</div><div class="sc-s">of NAV</div></div>
+    <div class="sc"><div class="sc-l">Cash</div><div class="sc-v" id="port-cash">—</div><div class="sc-s">connect feed / Alpaca</div></div>
+    <div class="sc"><div class="sc-l">Daily P&amp;L</div><div class="sc-v" id="port-daypnl">—</div><div class="sc-s">paper — Day P&amp;L</div></div>
+    <div class="sc"><div class="sc-l">Positions</div><div class="sc-v" id="port-positions">—</div><div class="sc-s">Alpaca paper | Auto-exec LIVE</div></div>
   </div>
-  <div style="background:rgba(142,68,173,0.06);border:1px solid rgba(142,68,173,0.2);border-radius:5px;padding:7px 12px;margin-bottom:12px;font-family:var(--mono);font-size:9px;color:#c39bd3;letter-spacing:0.1em;display:flex;justify-content:space-between;"><span>ALPACA PAPER — PA3T6SKBOIK5 — LIVE PRICES — Refreshes every 60 seconds</span><span id="last-update" style="color:var(--muted);">Connecting...</span></div>
+  <div style="background:rgba(142,68,173,0.06);border:1px solid rgba(142,68,173,0.2);border-radius:5px;padding:7px 12px;margin-bottom:12px;font-family:var(--mono);font-size:9px;color:#c39bd3;letter-spacing:0.1em;display:flex;justify-content:space-between;"><span>ALPACA PAPER — LIVE PRICES — via secure feed / session key</span><span id="last-update" style="color:var(--muted);">Connecting...</span></div>
   <div class="sh">Live positions</div>
   <div class="box">
     <table>
       <thead><tr><th>Ticker</th><th>Price</th><th>Qty</th><th>Entry</th><th>Mkt Value</th><th>Day P&amp;L</th><th>Total P&amp;L</th><th>Type</th></tr></thead>
-      <tbody id="positions-tbody"><tr><td colspan="8" class="mu" style="text-align:center;padding:18px;">Loading live positions from Alpaca - 17 holdings (enter API key to populate)</td></tr></tbody>
+      <tbody id="positions-tbody"><tr><td colspan="8" class="mu" style="text-align:center;padding:18px;">No live data yet — connect the n8n feed or enter Alpaca paper key to populate.</td></tr></tbody>
     </table>
-    <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg3);border-top:1px solid var(--border);font-family:var(--mono);font-size:9px;"><span style="color:var(--muted);">17 positions | ~60% deployed | ~40% cash</span><span class="up">P&amp;L: live via Alpaca</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg3);border-top:1px solid var(--border);font-family:var(--mono);font-size:9px;"><span style="color:var(--muted);">positions / deployment — live via feed</span><span class="up">P&amp;L: live via Alpaca</span></div>
   </div>
   <div class="sh">Sector intelligence</div>
   <div class="g2">
@@ -355,6 +355,7 @@ tr:hover td{background:rgba(255,255,255,0.015);}
       <div class="sb-row"><div class="sb-name">Mag 7</div><div class="sb-track"><div class="sb-fill" style="width:35%;background:var(--red2);"></div></div><div class="sb-pct dn">-8.8%</div></div>
     </div></div>
   </div>
+  <div style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:2px;">Sector reads are the last manual APEX snapshot — not live. Feed-driven sector data is a next-session build.</div>
 </div>
 
 <!-- GRANDMASTER -->
@@ -398,7 +399,7 @@ Your Anthropic API key will be prompted on first message.</div>
       </tbody></table></div>
       <div class="sh" style="margin-top:12px;">IR pipeline</div>
       <div class="box">
-        <div class="cr"><div class="cr-n"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cca5a2baa9bfb88caebea9bbafadbca5b8ada0a0bce2afa3a1">[email&#160;protected]</a></div><span class="tag tg-live">LIVE</span></div>
+        <div class="cr"><div class="cr-n">invest@brewcapitallp.com</div><span class="tag tg-live">LIVE</span></div>
         <div class="cr"><div class="cr-n">SPF / DKIM / DMARC</div><span class="tag tg-live">LIVE</span><div class="cr-d">Cloudflare DNS</div></div>
         <div class="cr"><div class="cr-n">Proton SMTP in W4</div><span class="tag tg-fix">NOT WIRED</span><div class="cr-d">Tier 1</div></div>
         <div class="cr"><div class="cr-n">W4 3x daily triggers</div><span class="tag tg-fix">NOT BUILT</span><div class="cr-d">8/11AM/2PM</div></div>
@@ -420,9 +421,9 @@ Your Anthropic API key will be prompted on first message.</div>
       </div>
       <div class="sh" style="margin-top:12px;">Fund structure</div>
       <div class="box">
-        <div class="cr"><div class="cr-n">Brew Capital LP</div><div class="cr-d">EIN 41-5090198</div></div>
-        <div class="cr"><div class="cr-n">Brew Fund LLC (GP)</div><div class="cr-d">EIN 41-5060918</div></div>
-        <div class="cr"><div class="cr-n">Winning Brew LLC (Holdco)</div><div class="cr-d">EIN 41-4918484</div></div>
+        <div class="cr"><div class="cr-n">Brew Capital LP</div><div class="cr-d">Fund</div></div>
+        <div class="cr"><div class="cr-n">Brew Fund LLC (GP)</div><div class="cr-d">General Partner</div></div>
+        <div class="cr"><div class="cr-n">Winning Brew LLC (Holdco)</div><div class="cr-d">Holding Co.</div></div>
         <div class="cr"><div class="cr-n">CIK / SEC File No.</div><div class="cr-d">0002124864 / 021-578711</div></div>
         <div class="cr"><div class="cr-n">Mercury banking</div><span class="tag tg-live">APPROVED</span><div class="cr-d">Brew Fund LLC</div></div>
       </div>
@@ -552,7 +553,7 @@ Your Anthropic API key will be prompted on first message.</div>
           <tr><td class="mn" style="color:var(--gold2);">Analyze [TICKER]</td><td>Full sector + macro + lollapalooza</td></tr>
           <tr><td class="mn" style="color:var(--gold2);">SWARM [TICKER]</td><td>All 278 minds on one ticker</td></tr>
           <tr><td class="mn" style="color:var(--gold2);">MASTER STATUS</td><td>Full fund status snapshot</td></tr>
-          <tr><td class="mn" style="color:var(--gold2);">Portfolio check</td><td>Gate analysis all 9 positions</td></tr>
+          <tr><td class="mn" style="color:var(--gold2);">Portfolio check</td><td>Gate analysis all positions</td></tr>
           <tr><td class="mn" style="color:var(--gold2);">DEADLINE CHECK</td><td>All compliance deadlines</td></tr>
           <tr><td class="mn" style="color:var(--gold2);">Faith lesson</td><td>Daniel model + devotional</td></tr>
           <tr><td class="mn" style="color:var(--gold2);">Social lesson</td><td>Voss / Carnegie / Cialdini</td></tr>
@@ -562,14 +563,12 @@ Your Anthropic API key will be prompted on first message.</div>
       </div>
       <div class="box"><div class="bh">Key accounts and dates</div>
         <table><thead><tr><th>Item</th><th>Detail</th></tr></thead><tbody>
-          <tr><td>Fund Gmail</td><td class="mu mn"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="06647463716567766f72676a6a7646616b676f6a2865696b">[email&#160;protected]</a></td></tr>
-          <tr><td>Investor email</td><td class="mu mn"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e7770687b6d6a5e7c6c7b697d7f6e776a7f72726e307d7173">[email&#160;protected]</a></td></tr>
+          <tr><td>Fund Gmail</td><td class="mu mn">info@brewcapitallp.com</td></tr>
+          <tr><td>Investor email</td><td class="mu mn">invest@brewcapitallp.com</td></tr>
           <tr><td>Telegram bot</td><td class="mu mn">@BrewCapitalBot</td></tr>
           <tr><td>n8n</td><td class="mu mn">brew-capital-n8n.onrender.com</td></tr>
-          <tr><td>Alpaca paper ID</td><td class="mu mn">PA3T6SKBOIK5</td></tr>
           <tr><td>EDGAR CIK</td><td class="mu mn">0002124864</td></tr>
           <tr><td>SEC File No.</td><td class="mu mn">021-578711</td></tr>
-          <tr><td>TextNow</td><td class="mu mn">(346) 800-8862</td></tr>
           <tr><td>Reg S-P due</td><td class="mu mn">June 3, 2026</td></tr>
           <tr><td>EDGAR confirm</td><td class="mu mn">March 31, 2027</td></tr>
         </tbody></table>
@@ -677,7 +676,7 @@ Your Anthropic API key will be prompted on first message.</div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function sw(panelId, tabId) {
   var panels = document.querySelectorAll('.panel');
   var tabs = document.querySelectorAll('.nt');
@@ -689,10 +688,10 @@ function sw(panelId, tabId) {
   if(t) t.classList.add('active');
 }
 
-// ═══ ALPACA LIVE DATA ═══
+// ═══ ALPACA LIVE DATA (fallback when no secure feed is set) ═══
 var AK='', ALPK='', ALPS='';
 var refreshInterval = null;
-var FEED_WEBHOOK = ''; // n8n webhook that reads the PRIVATE master sheet server-side; set after building it. Empty = secure feed not yet connected.
+var FEED_WEBHOOK = ''; // n8n webhook that reads the PRIVATE master sheet + Alpaca server-side and returns curated JSON. Set this to go fully live. Empty = secure feed not yet connected.
 
 function getAlpacaHeaders() {
   return {'APCA-API-KEY-ID': ALPK, 'APCA-API-SECRET-KEY': ALPS};
@@ -888,7 +887,7 @@ function sendChat() {
   thinking.style.display='block';
 
   var mode=/zacks|levelfields|form 4|congressional/i.test(q)?'SIGNAL_MODE':'FAST_MODE';
-  var sys='APEX OS v7.1.1 GRANDMASTER — 278 MINDS — BREW CAPITAL LP. Mode:'+mode+'. Fast-mode: Gate 1 NEVER blocks casual questions.\n\nFUND: Brew Capital LP | NAV ~$99K paper | Form D FILED | VIX ~16 NORMAL full size\nPORTFOLIO (17): CCJ DBA EWJ GLD ITA LVHD PAVE QQQ TAIL TLT URA XLE XLF XLI XLP XLV XME\nLEADING: Defense+19% Gold+25% Energy+22% Materials+18% Industrials+16%\nLAGGING: Tech-3% ConsumerCyclical-5% Mag7-8.8%\nMACRO: Iran de-escalation. Oil~$100. Tariff uncertainty. Rate cut odds 38% YE.\n\nFor stock/ETF questions: direct analysis. Never block.\nFor portfolio questions: Mind 278 Portfolio Architect + Swensen + Dalio + Lynch.\nFor faith questions: Daniel model, biblical wisdom, practical and sincere.\nFor social questions: Voss labeling, Carnegie genuine interest, Cialdini influence.\n\nTEACHING PROTOCOL: After every recommendation explain like smart 12-year-old.\n\nALWAYS END:\nGRANDMASTER DECISION: [answer]\nCONFIDENCE: [X/10]\nTHE MIND: [primary mind]\nPLAIN ENGLISH: [2 sentences]\nBREW CAPITAL FIT: [BUY/WATCHLIST/PASS/N-A]';
+  var sys='APEX OS v7.1.1 GRANDMASTER — 278 MINDS — BREW CAPITAL LP. Mode:'+mode+'. Fast-mode: Gate 1 NEVER blocks casual questions.\n\nFUND: Brew Capital LP | Form D FILED | VIX ~16 NORMAL full size\nLEADING: Defense Gold Energy Materials Industrials\nLAGGING: Tech ConsumerCyclical Mag7\nMACRO: de-escalation. Tariff uncertainty.\n\nFor stock/ETF questions: direct analysis. Never block.\nFor portfolio questions: Mind 278 Portfolio Architect + Swensen + Dalio + Lynch.\nFor faith questions: Daniel model, biblical wisdom, practical and sincere.\nFor social questions: Voss labeling, Carnegie genuine interest, Cialdini influence.\n\nTEACHING PROTOCOL: After every recommendation explain like smart 12-year-old.\n\nALWAYS END:\nGRANDMASTER DECISION: [answer]\nCONFIDENCE: [X/10]\nTHE MIND: [primary mind]\nPLAIN ENGLISH: [2 sentences]\nBREW CAPITAL FIT: [BUY/WATCHLIST/PASS/N-A]';
 
   fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
@@ -909,23 +908,11 @@ function sendChat() {
 
 
 // ═══ WATCHLIST — LIVE FROM GOOGLE SHEETS ═══
-var SPREADSHEET_ID = '1kfKYa21WWy3KRiYlcSWonAESrXTMZPAPIs994gArbzA';
+var SPREADSHEET_ID = ''; // intentionally blank on the public page — the master sheet is read server-side via FEED_WEBHOOK, never exposed here
 var WATCHLIST_RANGE = 'WATCHLIST!A:K';
 var wlRefreshInterval = null;
 
-// === APPROVALS — LIVE FROM GOOGLE SHEETS (PENDING_TRADES) ===
-function gvizUrl(sheet){return 'https://docs.google.com/spreadsheets/d/'+SPREADSHEET_ID+'/gviz/tq?tqx=out:json&sheet='+encodeURIComponent(sheet);}
-async function gvizRows(sheet){
-  var r=await fetch(gvizUrl(sheet));
-  if(!r.ok) throw new Error('HTTP '+r.status+' on tab "'+sheet+'"');
-  var t=await r.text();
-  if(t.trim().charAt(0)==='<') throw new Error('sheet not link-shared (Google returned a login page). Set Share to Anyone-with-link: Viewer.');
-  var m=t.match(/setResponse\((.*?)\);/s); if(!m) throw new Error('unexpected response for tab "'+sheet+'"');
-  var d=JSON.parse(m[1]);
-  if(d.status==='error'){var er=(d.errors&&d.errors[0]); throw new Error('tab "'+sheet+'" not found / unreadable ('+(((er&&(er.detailed_message||er.message))||'check exact tab name').replace(/<[^>]+>/g,''))+')');}
-  return (d.table&&d.table.rows)?d.table.rows:[];
-}
-function _cell(c,i){return (c&&c[i])?(c[i].f||c[i].v||''):'';}
+// === APPROVALS — LIVE VIA SECURE FEED ===
 function tgCmd(c){ alert('Send "'+c+'" to @BrewCapitalBot. Telegram is the action channel; this panel mirrors what is pending.'); }
 async function loadApprovals(){
   var list=document.getElementById('approvals-list');
@@ -935,19 +922,18 @@ async function loadApprovals(){
   if(!FEED_WEBHOOK){ if(loading){loading.style.display='block';loading.textContent='Approvals read your PRIVATE PENDING_TRADES via a secure n8n feed (not yet connected). Kept private — primary action channel remains @BrewCapitalBot.';} return; }
   try{
     var html=''; var n=0;
-    var pend=await gvizRows('PENDING_TRADES');
-    pend.forEach(function(row,idx){
-      if(idx===0) return;
-      var c=row.c; if(!c) return;
-      var ticker=_cell(c,4); var status=(''+_cell(c,11)).toUpperCase();
-      if(!ticker||ticker==='ticker') return;
+    var r=await fetch(FEED_WEBHOOK+(FEED_WEBHOOK.indexOf('?')<0?'?':'&')+'view=approvals',{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    var d=await r.json();
+    var pend=(d&&d.pending_trades)?d.pending_trades:[];
+    pend.forEach(function(t){
+      var status=(''+(t.status||'')).toUpperCase();
       if(status.indexOf('WAIT')<0 && status.indexOf('NOTIFY')<0 && status.indexOf('PENDING')<0) return;
-      var side=_cell(c,6),qty=_cell(c,5),conv=_cell(c,7),score=_cell(c,8),dl=_cell(c,10),src=_cell(c,2);
       n++;
-      html+='<div class="ac trade"><div class="ac-t">Trade approval \u2014 '+side+' '+qty+' '+ticker+'</div>'
-        +'<div class="ac-s">Source: '+src+' \u00b7 Conviction: '+conv+' \u00b7 Score: '+score+'/14</div>'
-        +'<div class="ac-m">Deadline: '+dl+' \u00b7 Status: '+status+'</div>'
-        +'<div class="ac-btns"><button class="btn-y" onclick="tgCmd(\'Y '+ticker+'\')">Y \u2014 EXECUTE</button><button class="btn-n" onclick="tgCmd(\'N '+ticker+'\')">N \u2014 PASS</button></div></div>';
+      html+='<div class="ac trade"><div class="ac-t">Trade approval \u2014 '+(t.side||'')+' '+(t.qty||'')+' '+(t.ticker||'')+'</div>'
+        +'<div class="ac-s">Source: '+(t.source||'')+' \u00b7 Conviction: '+(t.conviction||'')+' \u00b7 Score: '+(t.score||'')+'/14</div>'
+        +'<div class="ac-m">Deadline: '+(t.deadline||'')+' \u00b7 Status: '+status+'</div>'
+        +'<div class="ac-btns"><button class="btn-y" onclick="tgCmd(\'Y '+(t.ticker||'')+'\')">Y \u2014 EXECUTE</button><button class="btn-n" onclick="tgCmd(\'N '+(t.ticker||'')+'\')">N \u2014 PASS</button></div></div>';
     });
     if(loading) loading.style.display='none';
     list.innerHTML=html;
@@ -978,20 +964,11 @@ async function loadWatchlist() {
   }
 
   try {
-    var url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/gviz/tq?tqx=out:json&sheet=WATCHLIST';
-    var response = await fetch(url);
-    if (!response.ok) throw new Error('HTTP ' + response.status + ' (is the sheet link-shared?)');
-    var text = await response.text();
-    if (text.trim().charAt(0) === '<') throw new Error('sheet not link-shared — Google returned a login page. Set Share to Anyone-with-link: Viewer.');
-    
-    // Parse Google Visualization JSON
-    var jsonStr = text.match(/google\.visualization\.Query\.setResponse\((.*?)\);/s);
-    if (!jsonStr) throw new Error('Could not parse sheet data');
-    
-    var data = JSON.parse(jsonStr[1]);
-    var rows = data.table.rows;
-    var cols = data.table.cols;
-    
+    var response = await fetch(FEED_WEBHOOK + (FEED_WEBHOOK.indexOf('?')<0?'?':'&') + 'view=watchlist', {cache:'no-store'});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    var data = await response.json();
+    var rows = (data && data.watchlist) ? data.watchlist : [];
+
     if (!rows || rows.length === 0) {
       loading.textContent = 'No watchlist entries yet. Intelligence workflows will populate this automatically.';
       loading.style.display = 'block';
@@ -1001,47 +978,30 @@ async function loadWatchlist() {
     tbody.innerHTML = '';
     var validRows = 0;
 
-    rows.forEach(function(row, idx) {
-      if (idx === 0) return; // skip header if present
-      var cells = row.c;
-      if (!cells || !cells[0]) return;
-      
-      var date = cells[0] ? (cells[0].f || cells[0].v || '') : '';
-      var time = cells[1] ? (cells[1].v || '') : '';
-      var source = cells[2] ? (cells[2].v || '') : '';
-      var ticker = cells[3] ? (cells[3].v || '') : '';
-      var thesis = cells[4] ? (cells[4].v || '') : '';
-      var lolla = cells[5] ? (cells[5].v || '') : '';
-      var narrative = cells[6] ? (cells[6].v || '') : '';
-      var entry = cells[7] ? (cells[7].v || '') : '';
-      var status = cells[8] ? (cells[8].v || '') : '';
-      var action = cells[9] ? (cells[9].v || '') : '';
-      var notes = cells[10] ? (cells[10].v || '') : '';
-
+    rows.forEach(function(r) {
+      var ticker = r.ticker || '';
       if (!ticker || ticker === 'Ticker') return;
-
       validRows++;
 
-      // Status badge color
+      var status = r.status || '';
       var badgeStyle = 'background:rgba(52,152,219,0.15);color:#3498db;border:1px solid rgba(52,152,219,0.3);';
       if (status.includes('VETO') || status.includes('CROWDING')) badgeStyle = 'background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);';
       if (status.includes('CHESS')) badgeStyle = 'background:rgba(255,165,0,0.15);color:#FFA500;border:1px solid rgba(255,165,0,0.3);';
       if (status.includes('CONTRARIAN')) badgeStyle = 'background:rgba(46,204,113,0.15);color:#2ecc71;border:1px solid rgba(46,204,113,0.3);';
       if (status.includes('GEOPOLITICAL')) badgeStyle = 'background:rgba(142,68,173,0.15);color:#8e44ad;border:1px solid rgba(142,68,173,0.3);';
 
-      // Source badge
-      var sourceBadge = source.replace('W31 Crowding Detector','W31').replace('W32 Geopolitical Scanner','W32').replace('W34 Narrative Intelligence','W34').replace('W35 Second Order Engine','W35');
-
+      var thesis = r.thesis || '';
+      var notes = r.notes || '';
       var tr = document.createElement('tr');
-      tr.innerHTML = 
-        '<td class="mn" style="font-size:9px;">' + date + '</td>' +
-        '<td><span style="font-family:var(--mono);font-size:9px;background:rgba(212,175,55,0.1);color:var(--gold);padding:2px 6px;border-radius:3px;">' + sourceBadge + '</span></td>' +
+      tr.innerHTML =
+        '<td class="mn" style="font-size:9px;">' + (r.date || '') + '</td>' +
+        '<td><span style="font-family:var(--mono);font-size:9px;background:rgba(212,175,55,0.1);color:var(--gold);padding:2px 6px;border-radius:3px;">' + (r.source || '') + '</span></td>' +
         '<td class="tk">' + ticker + '</td>' +
-        '<td class="mu" style="max-width:150px;font-size:10px;">' + (thesis || '').substring(0, 80) + (thesis && thesis.length > 80 ? '...' : '') + '</td>' +
-        '<td class="mn">' + lolla + '</td>' +
+        '<td class="mu" style="max-width:150px;font-size:10px;">' + thesis.substring(0, 80) + (thesis.length > 80 ? '...' : '') + '</td>' +
+        '<td class="mn">' + (r.lollapalooza || '') + '</td>' +
         '<td><span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:3px;' + badgeStyle + '">' + status + '</span></td>' +
-        '<td class="mn">' + action + '</td>' +
-        '<td class="mu" style="max-width:150px;font-size:10px;">' + (notes || '').substring(0, 80) + (notes && notes.length > 80 ? '...' : '') + '</td>';
+        '<td class="mn">' + (r.action || '') + '</td>' +
+        '<td class="mu" style="max-width:150px;font-size:10px;">' + notes.substring(0, 80) + (notes.length > 80 ? '...' : '') + '</td>';
       tbody.appendChild(tr);
     });
 
@@ -1058,7 +1018,7 @@ async function loadWatchlist() {
   } catch(e) {
     loading.style.display = 'none';
     errorDiv.style.display = 'block';
-    errorDiv.textContent = 'Error loading watchlist: ' + e.message + '. Make sure the sheet is publicly readable.';
+    errorDiv.textContent = 'Error loading watchlist: ' + e.message + '.';
     console.error('Watchlist error:', e);
   }
 }
@@ -1076,18 +1036,43 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// ═══ SECURE n8n FEED — server-side Alpaca + private Sheet → one curated JSON. No keys in the browser, no CORS. ═══
+// Next n8n session: build a webhook that returns JSON like (all fields optional; page is defensive):
+//   { "nav":100123.45, "cash":40000, "buying_power":167000, "day_pl":462,
+//     "positions_count":17, "updated":"2:30 PM CST" }
+// Then set FEED_WEBHOOK above to that webhook URL. Live numbers flow with zero further edits.
+async function fetchFeed(){
+  if(!FEED_WEBHOOK) return false;
+  try{
+    var r=await fetch(FEED_WEBHOOK,{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    var d=await r.json();
+    if(d.nav!=null){ setEl('nav-val', fmt(d.nav), d.nav>=100000?'gold':'dn'); setEl('port-nav', fmt(d.nav), 'gold'); }
+    if(d.cash!=null){ setEl('cash-val', fmt(d.cash)); setEl('port-cash', fmt(d.cash)); }
+    if(d.buying_power!=null) setEl('bp-val', fmt(d.buying_power));
+    if(d.day_pl!=null){ setEl('daily-pnl', fmtPL(d.day_pl), d.day_pl>=0?'up':'dn'); setEl('port-daypnl', fmtPL(d.day_pl), d.day_pl>=0?'up':'dn'); }
+    if(d.positions_count!=null){ setEl('port-count', d.positions_count+' positions'); setEl('port-positions', d.positions_count); }
+    var u=document.getElementById('last-update'); if(u) u.textContent='Feed update: '+(d.updated||new Date().toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'2-digit',minute:'2-digit'})+' CST');
+    return true;
+  }catch(e){ console.error('Feed fetch error:',e); return false; }
+}
+
 function init(){
-  ALPK = sessionStorage.getItem('bc_alpaca_key') || '';
-  ALPS = sessionStorage.getItem('bc_alpaca_secret') || '';
-  if(!ALPK){ ALPK = prompt('Enter Alpaca Paper API Key (PK...) — re-entered each session for safety:') || ''; if(ALPK) sessionStorage.setItem('bc_alpaca_key', ALPK); }
-  if(ALPK && !ALPS){ ALPS = prompt('Enter Alpaca Paper Secret Key:') || ''; if(ALPS) sessionStorage.setItem('bc_alpaca_secret', ALPS); }
-  if(ALPK && ALPS){ fetchAlpacaData(); if(!refreshInterval) refreshInterval = setInterval(fetchAlpacaData, 60000); }
+  if(FEED_WEBHOOK){
+    fetchFeed(); if(!refreshInterval) refreshInterval=setInterval(fetchFeed,60000);
+  } else {
+    ALPK = sessionStorage.getItem('bc_alpaca_key') || '';
+    ALPS = sessionStorage.getItem('bc_alpaca_secret') || '';
+    if(!ALPK){ ALPK = prompt('No secure feed connected yet. Enter Alpaca Paper API Key (PK...) to load live numbers in-browser, or Cancel to leave them blank:') || ''; if(ALPK) sessionStorage.setItem('bc_alpaca_key', ALPK); }
+    if(ALPK && !ALPS){ ALPS = prompt('Enter Alpaca Paper Secret Key:') || ''; if(ALPS) sessionStorage.setItem('bc_alpaca_secret', ALPS); }
+    if(ALPK && ALPS){ fetchAlpacaData(); if(!refreshInterval) refreshInterval = setInterval(fetchAlpacaData, 60000); }
+  }
   try{ loadApprovals(); setInterval(loadApprovals,120000); }catch(e){}
 }
 // Password gate: deterrent for a static page (NOT real security - anyone with the file can bypass via devtools).
-// Real protection = host behind auth (Cloudflare Access / Netlify) or the n8n proxy. Default password below; change GATE_HASH to rotate.
+// Real protection = host behind auth (Cloudflare Access / Netlify) or the n8n proxy. Change GATE_HASH to rotate.
 function _h(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))>>>0;}return h;}
-var GATE_HASH=1153814937; // password: "winningbrew"
+var GATE_HASH=1153814937; // rotate by changing this hash
 function checkGate(){
   var el=document.getElementById('pw-inp'), er=document.getElementById('pw-err');
   if(el && _h(el.value)===GATE_HASH){ try{sessionStorage.setItem('bc_gate','1');}catch(e){} var g=document.getElementById('pwgate'); if(g) g.style.display='none'; init(); }
