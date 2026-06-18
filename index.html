@@ -124,6 +124,12 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 .mbar-t{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
 .mbar-i{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;}
 .mbar-i span em{color:var(--muted);font-style:normal;margin-right:4px;}
+.att{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--border);border-radius:5px;background:var(--bg3);color:var(--muted2);}.att b{color:var(--text);}
+.lnav-row{display:flex;align-items:center;justify-content:space-between;margin-top:9px;}
+.lnav{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 11px;border-radius:4px;cursor:pointer;background:var(--bg3);border:1px solid var(--border2);color:var(--muted2);}
+.lnav:hover{color:var(--gold2);border-color:rgba(201,168,76,0.4);}
+.lnav:disabled{opacity:0.35;cursor:default;}
+.lcount{font-family:var(--mono);font-size:9px;color:var(--muted);}
 #pwgate{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:var(--mono);}
 #pwgate .pw-card{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:32px 28px;width:300px;text-align:center;}
 #pwgate h2{color:var(--gold);font-size:13px;letter-spacing:0.22em;margin-bottom:18px;}
@@ -137,10 +143,11 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 <div id="pwgate">
   <div class="pw-card">
     <h2>BREW CAPITAL</h2>
-    <input id="pw-inp" type="password" placeholder="Access password" autocomplete="off">
-    <button onclick="checkGate()">UNLOCK</button>
-    <div class="pw-err" id="pw-err">Incorrect password</div>
-    <div class="pw-note">Private command center — authorized access only.</div>
+    <input id="pw-key" type="text" placeholder="Alpaca paper key (PK...)" autocomplete="off" spellcheck="false">
+    <input id="pw-sec" type="password" placeholder="Alpaca secret" autocomplete="off" spellcheck="false">
+    <button onclick="unlockGate()">UNLOCK</button>
+    <div class="pw-err" id="pw-err">Enter your Alpaca paper key to unlock.</div>
+    <div class="pw-note">Your Alpaca paper key unlocks the dashboard and loads live values. Stored only in this browser session — never saved to the page.</div>
   </div>
 </div>
 
@@ -170,7 +177,7 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 
 <div id="alpaca-connect" style="display:none;padding:10px 24px;background:rgba(201,168,76,0.06);border-bottom:1px solid var(--border);">
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px;">
-    <span style="color:var(--gold);letter-spacing:0.05em;">CONNECT ALPACA (paper) — loads live values · key stays in THIS browser only, never saved to the page:</span>
+    <span style="color:var(--gold);letter-spacing:0.05em;">FINISH CONNECT — enter the Alpaca secret to load live values (key already accepted):</span>
     <input id="ac-key" type="text" placeholder="API Key (PK...)" autocomplete="off" spellcheck="false" style="background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:6px 9px;border-radius:4px;font-family:var(--mono);font-size:11px;width:190px;">
     <input id="ac-sec" type="password" placeholder="Secret Key" autocomplete="off" spellcheck="false" style="background:var(--bg);border:1px solid var(--border2);color:var(--text);padding:6px 9px;border-radius:4px;font-family:var(--mono);font-size:11px;width:190px;">
     <button onclick="connectAlpaca()" style="background:var(--gold);color:#000;border:0;padding:6px 14px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">CONNECT</button>
@@ -180,6 +187,23 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 
 <!-- COMMAND -->
 <div class="panel active" id="p-command">
+  <div class="box" style="margin-bottom:14px;border-left:3px solid var(--gold);">
+    <div class="bh" style="color:var(--gold2);">What needs me — today</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;padding:11px 13px;">
+      <div class="att" id="att-approvals">Approvals: <b>—</b></div>
+      <div class="att" id="att-veto">Veto: <b>—</b></div>
+      <div class="att" id="att-breaker">Breaker / DD: <b>—</b></div>
+      <div class="att" id="att-errors">Errors (W0E): <b>—</b></div>
+      <div class="att" id="att-recon">Reconcile: <b>—</b></div>
+    </div>
+    <div style="padding:0 13px 10px;font-size:10px;color:var(--muted);font-family:var(--mono);">Live via the n8n feed. Until it's connected these stay neutral — the page won't fake an all-clear.</div>
+  </div>
+  <div class="box" id="activity-box" style="margin-bottom:16px;">
+    <div class="bh">Activity — workflow completions &amp; errors</div>
+    <div id="activity-list">
+      <div style="padding:9px 13px;font-size:11px;color:var(--muted);font-family:var(--mono);">Workflow completions and errors stream here once the n8n feed is connected — W0E error alarms, W69/W70 option fills, signal executions, exits. Newest first.</div>
+    </div>
+  </div>
   <div class="ks">
     <div><div class="ks-l">Kill Switch — W0</div><div class="ks-st" id="ks-st">SYSTEMS ARMED — 39 WORKFLOWS RUNNING — W0 WIRED INTO ALL EXECUTION PATHS</div></div>
     <div style="display:flex;gap:8px;"><button class="btn-halt" onclick="killIt()">HALT ALL</button><button class="btn-resume" id="btn-resume" onclick="resumeIt()">RESUME</button></div>
@@ -286,13 +310,13 @@ tr:hover td{background:rgba(255,255,255,0.015);}
   </div>
   <div class="sh">Claude — next session (needs n8n write tools)</div>
   <div class="box">
-    <div class="bi"><div class="bi-n">06</div><div class="bi-body"><div class="bi-name">Build secure feed webhook (dashboard ← private sheet)</div><div class="bi-sub">n8n reads the private sheet server-side, returns curated JSON. Keeps master private. Fixes Watchlist + Approvals + live NAV.</div></div><span class="tag tg-fix">BLOCKED</span></div>
+    <div class="bi"><div class="bi-n">06</div><div class="bi-body"><div class="bi-name">Build secure feed webhook (dashboard ← private sheet)</div><div class="bi-sub">n8n reads the private sheet server-side, returns curated JSON. Keeps master private. Fixes Watchlist + Approvals + live NAV + the attention strip + options book.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">07</div><div class="bi-body"><div class="bi-name">Build AGENT_LOG store + LOG-OUTPUT sub-workflow</div><div class="bi-sub">Every agent appends its full output.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">08</div><div class="bi-body"><div class="bi-name">Give W23B + W10 a read-AGENT_LOG step</div><div class="bi-sub">Lets Grandmaster reason across all agents.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">09</div><div class="bi-body"><div class="bi-name">Fill-reconciliation — catch unlogged manual trades</div><div class="bi-sub">Compare Alpaca activities vs TRACK_RECORD, append any missing + flag.</div></div><span class="tag tg-fix">BLOCKED</span></div>
+    <div class="bi"><div class="bi-n">09</div><div class="bi-body"><div class="bi-name">Fill-reconciliation — catch unlogged manual trades</div><div class="bi-sub">Compare Alpaca activities vs TRACK_RECORD, append any missing + flag. Feeds the Reconcile chip.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">10</div><div class="bi-body"><div class="bi-name">Fix Grandmaster Gate 4 stale W10 correlation reference</div><div class="bi-sub">In APEX-OS-Loader.</div></div><span class="tag tg-fix">BLOCKED</span></div>
     <div class="bi"><div class="bi-n">11</div><div class="bi-body"><div class="bi-name">Wire SIGNAL_LOG capture + weekly return backfill</div><div class="bi-sub">Depends on the SIGNAL_LOG tab.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">12</div><div class="bi-body"><div class="bi-name">Build/upgrade W19 LinkedIn + W20 7-touch (IR)</div><div class="bi-sub">Strict 506(b): inbound / relationship only, NO cold outreach.</div></div><span class="tag tg-fix">BLOCKED</span></div>
+    <div class="bi"><div class="bi-n">12</div><div class="bi-body"><div class="bi-name">Fund accounting agent — LP capital accounts + HWM</div><div class="bi-sub">Shadow ledger + mgmt/perf fee + per-LP high-water mark. Architect before first wire. NOT the book of record.</div></div><span class="tag tg-fix">BLOCKED</span></div>
   </div>
   <div class="sh">Done recently — Jun 8</div>
   <div class="box">
@@ -341,13 +365,20 @@ tr:hover td{background:rgba(255,255,255,0.015);}
     <div class="sc"><div class="sc-l">Positions</div><div class="sc-v" id="port-positions">—</div><div class="sc-s">Alpaca paper | Auto-exec LIVE</div></div>
   </div>
   <div style="background:rgba(142,68,173,0.06);border:1px solid rgba(142,68,173,0.2);border-radius:5px;padding:7px 12px;margin-bottom:12px;font-family:var(--mono);font-size:9px;color:#c39bd3;letter-spacing:0.1em;display:flex;justify-content:space-between;"><span>ALPACA PAPER — LIVE PRICES — via secure feed / session key</span><span id="last-update" style="color:var(--muted);">Connecting...</span></div>
-  <div class="sh">Live positions</div>
+  <div class="sh">Live positions — equity</div>
   <div class="box">
     <table>
       <thead><tr><th>Ticker</th><th>Price</th><th>Qty</th><th>Entry</th><th>Mkt Value</th><th>Day P&amp;L</th><th>Total P&amp;L</th><th>Type</th></tr></thead>
       <tbody id="positions-tbody"><tr><td colspan="8" class="mu" style="text-align:center;padding:18px;">No live data yet — connect the n8n feed or enter Alpaca paper key to populate.</td></tr></tbody>
     </table>
     <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg3);border-top:1px solid var(--border);font-family:var(--mono);font-size:9px;"><span style="color:var(--muted);">positions / deployment — live via feed</span><span class="up">P&amp;L: live via Alpaca</span></div>
+  </div>
+  <div class="sh">Options book — W69 / W70</div>
+  <div class="box">
+    <table>
+      <thead><tr><th>Contract</th><th>Strike</th><th>Exp</th><th>DTE</th><th>Qty</th><th>Premium</th><th>Mark</th><th>P&amp;L</th><th>Δ / Θ</th><th>IV / RV</th></tr></thead>
+      <tbody id="options-tbody"><tr><td colspan="10" class="mu" style="text-align:center;padding:14px;">No live options data yet — the options book loads via the n8n feed (W69 entries, W70 exits).</td></tr></tbody>
+    </table>
   </div>
   <div class="sh">Sector intelligence</div>
   <div class="g2">
@@ -457,13 +488,13 @@ Your Anthropic API key will be prompted on first message.</div>
   </div>
   <div class="g2">
     <div>
-      <div class="lc"><div class="lc-t">Social Mastery</div><div class="lc-a">Chris Voss — Tactical Empathy</div><div class="lc-b">The most powerful phrase in any high-stakes conversation is a label. "It seems like you have some concerns about this." Not a question — a label that names what the other person feels before they say it. When you name someone's emotion accurately, they feel understood. Defense drops. Trust forms instantly.</div><div class="lc-s">Practice today: label someone's emotion before they express it.</div><div class="pb"><div class="pb-f" style="width:13%;"></div></div><div class="pb-l"><span>Day 12 / 90</span><span>Social mastery</span></div></div>
-      <div class="lc"><div class="lc-t">Distressed Debt</div><div class="lc-a">Howard Marks — The Cycle of Credit</div><div class="lc-b">When a company's bonds trade at 40 cents on the dollar, most investors see failure. Marks sees an asset that pays par at maturity if the company survives — a 150% return embedded in what everyone else called garbage. The edge: doing the work nobody else will do. Reading the actual bond indenture. Understanding the capital structure. Modeling recovery scenarios.</div><div class="lc-s">Plain English: buying a house worth $500K for $200K because nobody else bothered to inspect it. You inspect. You win. AUM trigger: $2M.</div><div class="pb"><div class="pb-f" style="width:8%;"></div></div><div class="pb-l"><span>Lesson 4 / 52</span><span>Distressed debt</span></div></div>
+      <div class="lc"><div class="lc-t">Social Mastery</div><div class="lc-a" id="le-social-a"></div><div class="lc-b" id="le-social-b"></div><div class="lc-s" id="le-social-s"></div><div class="lnav-row"><button class="lnav" onclick="lessonNav('social',-1)">&lsaquo; Prev</button><span class="lcount" id="le-social-c"></span><button class="lnav" onclick="lessonNav('social',1)">Next &rsaquo;</button></div></div>
+      <div class="lc"><div class="lc-t">Distressed Debt</div><div class="lc-a" id="le-distressed-a"></div><div class="lc-b" id="le-distressed-b"></div><div class="lc-s" id="le-distressed-s"></div><div class="lnav-row"><button class="lnav" onclick="lessonNav('distressed',-1)">&lsaquo; Prev</button><span class="lcount" id="le-distressed-c"></span><button class="lnav" onclick="lessonNav('distressed',1)">Next &rsaquo;</button></div></div>
     </div>
     <div>
-      <div class="lc"><div class="lc-t">Investment Education</div><div class="lc-a">Jim Simons — The Edge That Never Stops</div><div class="lc-b">Simons never traded on intuition. Every trade had a statistical edge proven across thousands of instances. His question before every position: "What is the base rate of success for this exact setup?" Brew Capital's lollapalooza counter is this idea — stack factors until the base rate is undeniable. 9+ factors means the math says yes.</div><div class="lc-s">Application: Every signal scored 1-14. Nine plus means execute. Below five means pass. No exceptions.</div><div class="pb"><div class="pb-f" style="width:6%;"></div></div><div class="pb-l"><span>Week 3 / 52</span><span>Systematic trading</span></div></div>
-      <div class="lc"><div class="lc-t">Activist Investing</div><div class="lc-a">Carl Icahn — The Art of the Catalyst</div><div class="lc-b">Activist investing is finding a company whose stock is far below its true value and doing something about it. Buy enough shares to get a seat at the table. Force the change that unlocks the value: sell the division, return cash, replace the CEO. The stock was cheap because management was the problem. Remove the problem. Unlock the value. Icahn has made billions from this one insight applied thousands of times.</div><div class="lc-s">Plain English: Like a house worth $500K selling for $200K because the owner never fixed the leaky roof. You buy it, fix the roof, sell at $500K. In stocks the roof is usually bad management. AUM trigger: $10M.</div><div class="pb"><div class="pb-f" style="width:4%;"></div></div><div class="pb-l"><span>Lesson 2 / 52</span><span>Activist investing</span></div></div>
-      <div class="lc"><div class="lc-t">Leadership &amp; Debate</div><div class="lc-a">William Buckley — The Debate Method</div><div class="lc-b">Buckley never raised his voice. He lowered it. His power came from precision — the exact word, the measured pause, the devastating question delivered with perfect calm. Prepare your strongest objection to your own position first. Then you can answer it before they raise it.</div><div class="lc-s">Practice: Record 3 minutes on any topic. Listen back. Count filler words. Reduce by half each week.</div><div class="pb"><div class="pb-f" style="width:10%;"></div></div><div class="pb-l"><span>Day 9 / 90</span><span>Leadership &amp; debate</span></div></div>
+      <div class="lc"><div class="lc-t">Investment Education</div><div class="lc-a" id="le-investment-a"></div><div class="lc-b" id="le-investment-b"></div><div class="lc-s" id="le-investment-s"></div><div class="lnav-row"><button class="lnav" onclick="lessonNav('investment',-1)">&lsaquo; Prev</button><span class="lcount" id="le-investment-c"></span><button class="lnav" onclick="lessonNav('investment',1)">Next &rsaquo;</button></div></div>
+      <div class="lc"><div class="lc-t">Activist Investing</div><div class="lc-a" id="le-activist-a"></div><div class="lc-b" id="le-activist-b"></div><div class="lc-s" id="le-activist-s"></div><div class="lnav-row"><button class="lnav" onclick="lessonNav('activist',-1)">&lsaquo; Prev</button><span class="lcount" id="le-activist-c"></span><button class="lnav" onclick="lessonNav('activist',1)">Next &rsaquo;</button></div></div>
+      <div class="lc"><div class="lc-t">Leadership &amp; Debate</div><div class="lc-a" id="le-leadership-a"></div><div class="lc-b" id="le-leadership-b"></div><div class="lc-s" id="le-leadership-s"></div><div class="lnav-row"><button class="lnav" onclick="lessonNav('leadership',-1)">&lsaquo; Prev</button><span class="lcount" id="le-leadership-c"></span><button class="lnav" onclick="lessonNav('leadership',1)">Next &rsaquo;</button></div></div>
       <div class="lc"><div class="lc-t">Growth Tracker — All Curriculums</div>
         <div style="font-size:12px;display:flex;flex-direction:column;gap:5px;margin-top:4px;">
           <div style="display:flex;justify-content:space-between;"><span>Bible reading plan</span><span class="mn" style="color:var(--gold2);">Day 2 / 365</span></div>
@@ -698,7 +729,7 @@ function sw(panelId, tabId) {
   if(t) t.classList.add('active');
 }
 
-// ═══ ALPACA LIVE DATA (fallback when no secure feed is set) ═══
+// ═══ ALPACA LIVE DATA (used when no secure feed is set; key entered at the unlock gate) ═══
 var AK='', ALPK='', ALPS='';
 var refreshInterval = null;
 var FEED_WEBHOOK = ''; // n8n webhook that reads the PRIVATE master sheet + Alpaca server-side and returns curated JSON. Set this to go fully live. Empty = secure feed not yet connected.
@@ -750,9 +781,11 @@ async function fetchAlpacaData() {
     document.getElementById('last-update').textContent = 'Last update: ' + new Date().toLocaleTimeString('en-US', {timeZone:'America/Chicago', hour:'2-digit', minute:'2-digit', second:'2-digit'}) + ' CST';
   } catch(e) {
     console.error('Alpaca fetch error:', e);
-    var lu=document.getElementById('last-update'); if(lu) lu.textContent='Live fetch failed — this public page may be CORS-blocked from Alpaca. The n8n feed path avoids this.';
-    var m=document.getElementById('ac-msg'); if(m) m.textContent='Fetch failed (often CORS on a public page). The n8n feed avoids this entirely.';
-    showConnect(true);
+    var lu=document.getElementById('last-update'); if(lu) lu.textContent='Alpaca couldn\u2019t be reached directly \u2014 a public page is CORS-blocked from paper-api.alpaca.markets. Live values arrive via the n8n feed.';
+    var m=document.getElementById('ac-msg'); if(m) m.textContent='';
+    // Keys were already accepted, so this is a network/CORS block, not a bad key.
+    // Don't re-prompt for keys; the n8n feed is the working path.
+    showConnect(false);
   }
 }
 
@@ -779,6 +812,18 @@ function updateAccount(acct) {
 
 var positions_count = 0;
 
+// Alpaca returns equities AND option contracts in /v2/positions.
+// Option symbols are OCC format (e.g. AAPL260717C00300000) — these belong in the
+// Options book, NOT the equity table. isOption() + parseOCC() route them correctly.
+function isOption(sym){ return /^[A-Z.]{1,6}\d{6}[CP]\d{8}$/.test(sym || ''); }
+function parseOCC(sym){
+  var m=(sym||'').match(/^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$/);
+  if(!m) return null;
+  var expiry='20'+m[2]+'-'+m[3]+'-'+m[4];
+  var dte=Math.round((new Date(expiry+'T00:00:00') - new Date())/86400000);
+  return { root:m[1], cp:(m[5]==='C'?'CALL':'PUT'), strike:parseInt(m[6],10)/1000, expiry:expiry, dte:dte };
+}
+
 function updatePositions(positions) {
   positions_count = positions.length;
 
@@ -788,6 +833,8 @@ function updatePositions(positions) {
   tbody.innerHTML = '';
   var totalPL = 0;
   var totalVal = 0;
+  var optionRows = [];
+  var equityCount = 0;
 
   // Sort by market value descending
   positions.sort(function(a,b) { return parseFloat(b.market_value) - parseFloat(a.market_value); });
@@ -805,6 +852,19 @@ function updatePositions(positions) {
     totalPL += pl;
     totalVal += mv;
 
+    // Route option contracts to the Options book, not the equity table
+    if (isOption(sym)) {
+      var o = parseOCC(sym) || {};
+      optionRows.push({
+        contract: (o.root||'') + ' ' + (o.strike||'') + (o.cp==='PUT'?'P':'C'),
+        strike: o.strike, expiry: o.expiry, dte: o.dte,
+        qty: qty, premium: entry, mark: price, pl: pl,
+        delta: null, theta: null, iv: null, rv: null
+      });
+      return;
+    }
+
+    equityCount++;
     var plClass = pl >= 0 ? 'up' : 'dn';
     var dayClass = dayPL >= 0 ? 'up' : 'dn';
 
@@ -823,6 +883,12 @@ function updatePositions(positions) {
     row += '</tr>';
     tbody.innerHTML += row;
   });
+
+  if(!equityCount) tbody.innerHTML = '<tr><td colspan="8" class="mu" style="text-align:center;padding:18px;">No equity positions.</td></tr>';
+
+  // Greeks/IV aren't on the positions endpoint, so those columns stay blank here;
+  // the n8n feed (W69/W70) supplies full Greeks when wired.
+  renderOptions(optionRows);
 
   // Update footer
   setEl('port-total-pl', fmtPL(totalPL), totalPL >= 0 ? 'up' : 'dn');
@@ -859,8 +925,8 @@ function tick() {
 setInterval(tick, 1000); tick();
 
 function killIt() {
-  if(!confirm('HALT ALL WORKFLOWS?\nAlso send KILLSWITCH to @BrewCapitalBot.')) return;
-  document.getElementById('ks-st').textContent='KILLSWITCH ACTIVE — ALL SYSTEMS HALTED';
+  if(!confirm('HALT ALL WORKFLOWS?\nThis button is a visual flag only right now — it does NOT stop the workflows. To actually halt, send KILLSWITCH to @BrewCapitalBot. (Real one-tap HALT wires to the W0 webhook next n8n session.)')) return;
+  document.getElementById('ks-st').textContent='KILLSWITCH FLAGGED HERE — confirm by sending KILLSWITCH to @BrewCapitalBot';
   document.getElementById('ks-st').className='ks-st killed';
   document.querySelector('.btn-halt').style.display='none';
   document.getElementById('btn-resume').style.display='block';
@@ -1049,10 +1115,110 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// ═══ SCHOOL — clickable lesson archive (browse past lessons per curriculum) ═══
+// Arrays run oldest → newest; the card opens on the most recent and Prev walks back.
+// Content is accurate educational summaries of each thinker's documented approach.
+// Next n8n session: the feed can extend each track with the actual dated lessons your
+// School workflow has generated (push them onto these arrays, same shape).
+var LESSONS = {
+  investment: [
+    { author:"Benjamin Graham — Mr. Market & Margin of Safety", body:"Graham personified the market as a moody business partner who quotes you a price every day — some days euphoric, some days despairing. You are never obligated to trade on his mood; you act only when his price is far from value. Price is what you pay, value is what you get, and the gap between them is your margin of safety.", plain:"Plain English: buy a dollar of value for seventy cents, so even if you're wrong you don't get hurt." },
+    { author:"Harry Markowitz — Diversification, the Only Free Lunch", body:"Markowitz proved mathematically that combining assets that don't move together lowers a portfolio's risk without lowering its expected return. The lever isn't the number of holdings — it's their correlation. Two uncorrelated 1.0-Sharpe bets together beat either one alone.", plain:"Plain English: don't just hold many things — hold things that don't all fall on the same day." },
+    { author:"Ed Thorp — Find the Edge, Then Size It", body:"Thorp's rule was two-step and never skipped: first prove a genuine statistical edge, then size the bet with the Kelly criterion so a losing streak can never wipe you out. Most blow-ups come from correct ideas sized recklessly. Survival is the precondition for compounding.", plain:"Plain English: know you're actually favored, then bet small enough to live through a bad run." },
+    { author:"Jim Simons — The Edge That Never Stops", body:"Simons never traded on intuition. Every trade had a statistical edge proven across thousands of instances, and his question before any position was the base rate of success for that exact setup. Brew Capital's lollapalooza counter is this idea — stack factors until the base rate is undeniable. 9+ factors means the math says yes.", plain:"Application: every signal scored 1-14. Nine plus means execute. Below five means pass. No exceptions." }
+  ],
+  distressed: [
+    { author:"Benjamin Graham — Net-Nets", body:"Graham's deepest-value test: buy a company for less than its current assets minus all liabilities — below what's left if it shut down today and sold inventory and receivables. The balance sheet is the floor. You're paying nothing for the business and getting a discount on the cash.", plain:"Plain English: pay less than the cash and inventory are worth, and the business comes free." },
+    { author:"Seth Klarman — Margin of Safety in Stress", body:"In distressed situations outcomes are genuinely uncertain, so Klarman's protection is buying far enough below intrinsic value that you profit even if several things go wrong. He'd rather miss a winner than risk permanent loss. Patience and cash are positions, not failures.", plain:"Plain English: leave so much room to be wrong that being wrong still isn't fatal." },
+    { author:"Martin Whitman — Read the Indenture", body:"Whitman insisted the document, not the narrative, decides distressed outcomes: covenants and where your claim sits in the capital structure determine who actually gets paid. Senior secured ahead of subordinated ahead of equity. Seniority beats a good story.", plain:"Plain English: in bankruptcy, your spot in the payout line matters more than how good the pitch sounds." },
+    { author:"Howard Marks — The Cycle of Credit", body:"When a company's bonds trade at 40 cents on the dollar, most investors see failure. Marks sees an asset that pays par at maturity if the company survives — a large return embedded in what everyone else called garbage. The edge is doing the work nobody else will: reading the actual indenture, understanding the capital structure, modeling recovery scenarios.", plain:"Plain English: buying a house worth $500K for $200K because nobody else bothered to inspect it. You inspect. You win. AUM trigger: $2M." }
+  ],
+  activist: [
+    { author:"Benjamin Graham — Shareholders Are Owners", body:"Graham's foundational point for activism: a share is part-ownership of a real business, and owners are entitled to insist management run it in their interest. Most shareholders behave like ticket-holders; the activist behaves like a proprietor. That posture change is where the leverage starts.", plain:"Plain English: you own a slice of the company — act like an owner, not a spectator." },
+    { author:"Carl Icahn — The Art of the Catalyst", body:"Activism is finding a company trading far below its true value and doing something about it: buying enough shares to get a seat at the table, then forcing the change that unlocks value — sell a division, return cash, replace the CEO. The stock was cheap because management was the problem; remove the problem, unlock the value.", plain:"Plain English: a $500K house sells for $200K because the owner never fixed the roof. You buy it, fix the roof, sell at $500K. In stocks the roof is usually bad management. AUM trigger: $10M." },
+    { author:"Bill Ackman — Concentrated Conviction", body:"Ackman runs a handful of deeply-researched positions and is willing to be loud and public when he believes management is destroying value. The model: extreme due diligence, a clear thesis you can defend in a 100-page deck, and the patience to hold through years of fight. Concentration is the source of returns and the source of risk.", plain:"Plain English: a few big bets you understand cold beat dozens you barely know — but only if you've truly done the work." }
+  ],
+  social: [
+    { author:"Dale Carnegie — Genuine Interest", body:"Carnegie's core finding is that people respond to those who are sincerely interested in them, not those trying to be interesting. Ask about them, listen for the answer, and remember it next time. The most persuasive thing you can do early is make the other person feel genuinely seen.", plain:"Practice: be interested, not interesting — ask one real question and actually listen to the answer." },
+    { author:"Robert Cialdini — Reciprocity & Liking", body:"Cialdini showed influence rides on a few levers: people repay those who give first (reciprocity) and say yes to people they like and find similar to themselves. Give value before you ask, and find authentic common ground. Manufactured versions backfire — it has to be real.", plain:"Practice: give something useful first, and find one true thing you share before you ask for anything." },
+    { author:"Chris Voss — Calibrated Questions", body:"Voss's 'How am I supposed to do that?' hands your problem to the other side without conflict or a hard no. Calibrated 'how' and 'what' questions make the counterpart solve your constraint for you while feeling in control. It turns a standoff into joint problem-solving.", plain:"Practice: when stuck, ask a 'how' or 'what' question that makes them work the problem with you." },
+    { author:"Chris Voss — Tactical Empathy & Labeling", body:"The most powerful phrase in any high-stakes conversation is a label: 'It seems like you have some concerns about this.' Not a question — a label that names what the other person feels before they say it. When you name an emotion accurately, the person feels understood, defenses drop, and trust forms.", plain:"Practice today: label someone's emotion out loud before they express it." }
+  ],
+  leadership: [
+    { author:"Aristotle — Ethos, Pathos, Logos", body:"Aristotle's three pillars of persuasion work only together: ethos (your credibility), pathos (their emotion), and logos (your logic). Drop credibility and nobody listens; drop emotion and nobody moves; drop logic and nobody stays convinced. Audit any argument for which leg is missing.", plain:"Practice: before you argue, check you've earned trust, moved them, and are actually right — all three." },
+    { author:"Abraham Lincoln — Steelman First", body:"Lincoln could state his opponent's case better than they could, then take it apart. Stating the strongest version of the other side wins the room's trust and removes their escape routes. You can't beat a position you haven't truly understood.", plain:"Practice: argue against the best version of the other side, never a strawman." },
+    { author:"Winston Churchill — Cadence & the Pause", body:"Churchill's power was rhythm and the deliberate pause, not volume. Short words, varied sentence length, and silence at the right moment carry a room further than force. Brevity lands harder; the pause makes them lean in.", plain:"Practice: slow down and let a pause sit — the silence is doing the work." },
+    { author:"William Buckley — The Debate Method", body:"Buckley never raised his voice — he lowered it. His power came from precision: the exact word, the measured pause, the devastating question delivered with perfect calm. Prepare your strongest objection to your own position first, so you can answer it before they raise it.", plain:"Practice: record 3 minutes on any topic, listen back, count filler words, and cut them by half each week." }
+  ]
+};
+var lessonIdx = {};
+function renderLesson(track){
+  var arr = LESSONS[track]; if(!arr) return;
+  if(lessonIdx[track] == null) lessonIdx[track] = arr.length - 1; // open on most recent
+  var i = lessonIdx[track], L = arr[i];
+  var a=document.getElementById('le-'+track+'-a'); if(a) a.textContent = L.author;
+  var b=document.getElementById('le-'+track+'-b'); if(b) b.textContent = L.body;
+  var s=document.getElementById('le-'+track+'-s'); if(s) s.textContent = L.plain;
+  var c=document.getElementById('le-'+track+'-c'); if(c) c.textContent = 'Lesson ' + (i+1) + ' of ' + arr.length + (i===arr.length-1 ? ' · latest' : '');
+  var card = (a && a.closest) ? a.closest('.lc') : null;
+  if(card){
+    var btns = card.querySelectorAll('.lnav');
+    if(btns[0]) btns[0].disabled = (i === 0);
+    if(btns[1]) btns[1].disabled = (i === arr.length - 1);
+  }
+}
+function lessonNav(track, d){
+  var arr = LESSONS[track]; if(!arr) return;
+  if(lessonIdx[track] == null) lessonIdx[track] = arr.length - 1;
+  var next = lessonIdx[track] + d;
+  if(next < 0 || next > arr.length - 1) return;
+  lessonIdx[track] = next;
+  renderLesson(track);
+}
+['investment','distressed','activist','social','leadership'].forEach(renderLesson);
+
+
+function setAtt(id,label,val,bad){
+  var el=document.getElementById(id); if(!el) return;
+  el.innerHTML=label+'<b>'+val+'</b>';
+  el.style.borderColor = bad ? 'rgba(231,76,60,0.5)' : 'var(--border)';
+  el.style.color = bad ? 'var(--red2)' : 'var(--muted2)';
+}
+function renderOptions(opts){
+  var tb=document.getElementById('options-tbody'); if(!tb) return;
+  if(!opts.length){ tb.innerHTML='<tr><td colspan="10" class="mu" style="text-align:center;padding:14px;">No open options.</td></tr>'; return; }
+  var h='';
+  opts.forEach(function(o){
+    var pl=parseFloat(o.pl||0); var plc=pl>=0?'up':'dn';
+    h+='<tr><td class="tk">'+(o.contract||o.symbol||'')+'</td><td class="mn">'+(o.strike||'')+'</td><td class="mn">'+(o.expiry||'')+'</td><td class="mn">'+(o.dte!=null?o.dte:'')+'</td><td class="mn">'+(o.qty||'')+'</td><td class="mn">'+(o.premium!=null?fmt(o.premium):'')+'</td><td class="mn">'+(o.mark!=null?fmt(o.mark):'')+'</td><td class="'+plc+'">'+(o.pl!=null?fmtPL(pl):'')+'</td><td class="mn">'+(o.delta!=null?o.delta:'')+' / '+(o.theta!=null?o.theta:'')+'</td><td class="mn">'+(o.iv!=null?o.iv:'')+' / '+(o.rv!=null?o.rv:'')+'</td></tr>';
+  });
+  tb.innerHTML=h;
+}
+// Live workflow activity feed: completions (green) and errors (red), newest first.
+function renderActivity(items){
+  var el=document.getElementById('activity-list'); if(!el) return;
+  if(!items || !items.length){ el.innerHTML='<div style="padding:9px 13px;font-size:11px;color:var(--muted);font-family:var(--mono);">No recent activity.</div>'; return; }
+  var h='';
+  items.slice(0,15).forEach(function(it){
+    var isErr=(''+(it.type||'')).toLowerCase().indexOf('err')>=0;
+    var col=isErr?'var(--red2)':'var(--green2)';
+    var mark=isErr?'\u2715':'\u2713';
+    h+='<div style="display:flex;gap:9px;align-items:flex-start;padding:8px 13px;border-bottom:1px solid var(--border);">'
+      +'<span style="color:'+col+';font-family:var(--mono);font-size:12px;flex-shrink:0;line-height:1.5;">'+mark+'</span>'
+      +'<div style="flex:1;font-size:12px;line-height:1.5;">'+(it.text||'')+'</div>'
+      +'<span style="font-family:var(--mono);font-size:9px;color:var(--muted);flex-shrink:0;line-height:1.7;">'+(it.ts||'')+'</span></div>';
+  });
+  el.innerHTML=h;
+}
+
 // ═══ SECURE n8n FEED — server-side Alpaca + private Sheet → one curated JSON. No keys in the browser, no CORS. ═══
 // Next n8n session: build a webhook that returns JSON like (all fields optional; page is defensive):
-//   { "nav":100123.45, "cash":40000, "buying_power":167000, "day_pl":462,
-//     "positions_count":17, "updated":"2:30 PM CST" }
+//   { "nav":100123.45, "cash":40000, "buying_power":167000, "day_pl":462, "positions_count":17,
+//     "pending_approvals":0, "veto":false, "breaker":"NORMAL", "errors":0, "reconcile":"match",
+//     "options":[{ "contract":"AAPL 300C 2026-07-17","strike":300,"expiry":"2026-07-17","dte":30,"qty":1,"premium":7.65,"mark":8.10,"pl":45,"delta":0.55,"theta":-0.08,"iv":0.28,"rv":0.22 }],
+//     "activity":[{ "ts":"2:31 PM","type":"done","text":"W69 filled BUY 1 AAPL CALL 300 @ $7.65" },
+//                 { "ts":"1:05 PM","type":"error","text":"W2 LevelFields — execution error (see W0E)" }],
+//     "updated":"2:30 PM CST" }
 // Then set FEED_WEBHOOK above to that webhook URL. Live numbers flow with zero further edits.
 async function fetchFeed(){
   if(!FEED_WEBHOOK) return false;
@@ -1065,6 +1231,13 @@ async function fetchFeed(){
     if(d.buying_power!=null) setEl('bp-val', fmt(d.buying_power));
     if(d.day_pl!=null){ setEl('daily-pnl', fmtPL(d.day_pl), d.day_pl>=0?'up':'dn'); setEl('port-daypnl', fmtPL(d.day_pl), d.day_pl>=0?'up':'dn'); }
     if(d.positions_count!=null){ setEl('port-count', d.positions_count+' positions'); setEl('port-positions', d.positions_count); }
+    if(d.pending_approvals!=null) setAtt('att-approvals','Approvals: ',d.pending_approvals,(d.pending_approvals>0));
+    if(d.veto!=null) setAtt('att-veto','Veto: ',d.veto?'ACTIVE':'clear',!!d.veto);
+    if(d.breaker!=null) setAtt('att-breaker','Breaker / DD: ',d.breaker,((''+d.breaker).toLowerCase().indexOf('normal')<0 && (''+d.breaker).toLowerCase().indexOf('ok')<0));
+    if(d.errors!=null) setAtt('att-errors','Errors (W0E): ',d.errors,(d.errors>0));
+    if(d.reconcile!=null) setAtt('att-recon','Reconcile: ',d.reconcile,((''+d.reconcile).toLowerCase().indexOf('match')<0 && (''+d.reconcile).toLowerCase().indexOf('ok')<0));
+    if(Array.isArray(d.options)) renderOptions(d.options);
+    if(Array.isArray(d.activity)) renderActivity(d.activity);
     var u=document.getElementById('last-update'); if(u) u.textContent='Feed update: '+(d.updated||new Date().toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'2-digit',minute:'2-digit'})+' CST');
     return true;
   }catch(e){ console.error('Feed fetch error:',e); return false; }
@@ -1094,19 +1267,26 @@ function init(){
   }
   try{ loadApprovals(); setInterval(loadApprovals,120000); }catch(e){}
 }
-// Password gate: deterrent for a static page (NOT real security - anyone with the file can bypass via devtools).
-// Real protection = host behind auth (Cloudflare Access / Netlify) or the n8n proxy. Change GATE_HASH to rotate.
-function _h(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))>>>0;}return h;}
-var GATE_HASH=1153814937; // rotate by changing this hash
-function checkGate(){
-  var el=document.getElementById('pw-inp'), er=document.getElementById('pw-err');
-  if(el && _h(el.value)===GATE_HASH){ try{sessionStorage.setItem('bc_gate','1');}catch(e){} var g=document.getElementById('pwgate'); if(g) g.style.display='none'; init(); }
-  else { if(er) er.style.display='block'; if(el) el.value=''; }
+// Unlock gate: your Alpaca paper key IS the key. Entering it unlocks the dashboard and loads live values.
+// Stored only in sessionStorage (this browser, this session) — never written into the page or committed.
+// NOTE: a public static page can still be opened by viewing source; this gate is convenience + live-data unlock,
+// not hard security. Real access control = Cloudflare Access (password + 2FA) once this is hosted on your domain.
+function unlockGate(){
+  var k=document.getElementById('pw-key'), s=document.getElementById('pw-sec'), er=document.getElementById('pw-err');
+  var kv=k?k.value.trim():'', sv=s?s.value.trim():'';
+  if(!kv){ if(er){er.style.display='block';er.textContent='Enter your Alpaca paper key to unlock.';} return; }
+  ALPK=kv; ALPS=sv;
+  try{ sessionStorage.setItem('bc_alpaca_key',ALPK); if(sv) sessionStorage.setItem('bc_alpaca_secret',ALPS); sessionStorage.setItem('bc_gate','1'); }catch(e){}
+  var g=document.getElementById('pwgate'); if(g) g.style.display='none';
+  init();
 }
 window.addEventListener('load', function(){
   var g=document.getElementById('pwgate');
   if(sessionStorage.getItem('bc_gate')==='1'){ if(g) g.style.display='none'; init(); }
-  else if(g){ var i=document.getElementById('pw-inp'); if(i){ i.focus(); i.addEventListener('keydown',function(e){ if(e.key==='Enter') checkGate(); }); } }
+  else if(g){
+    var i=document.getElementById('pw-key'); if(i){ i.focus(); i.addEventListener('keydown',function(e){ if(e.key==='Enter') unlockGate(); }); }
+    var s=document.getElementById('pw-sec'); if(s){ s.addEventListener('keydown',function(e){ if(e.key==='Enter') unlockGate(); }); }
+  }
 });
 </script>
 </body>
