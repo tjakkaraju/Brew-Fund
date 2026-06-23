@@ -732,7 +732,7 @@ function sw(panelId, tabId) {
 // ═══ ALPACA LIVE DATA (used when no secure feed is set; key entered at the unlock gate) ═══
 var AK='', ALPK='', ALPS='';
 var refreshInterval = null;
-var FEED_WEBHOOK = ''; // n8n webhook that reads the PRIVATE master sheet + Alpaca server-side and returns curated JSON. Set this to go fully live. Empty = secure feed not yet connected.
+var FEED_WEBHOOK = 'https://brew-capital-n8n.onrender.com/webhook/dashboard-feed?token=421bffb6670224d4563656be838bdb32'; // n8n webhook that reads the PRIVATE master sheet + Alpaca server-side and returns curated JSON. Set this to go fully live. Empty = secure feed not yet connected.
 
 function getAlpacaHeaders() {
   return {'APCA-API-KEY-ID': ALPK, 'APCA-API-SECRET-KEY': ALPS};
@@ -1233,9 +1233,9 @@ async function fetchFeed(){
     if(d.positions_count!=null){ setEl('port-count', d.positions_count+' positions'); setEl('port-positions', d.positions_count); }
     if(d.pending_approvals!=null) setAtt('att-approvals','Approvals: ',d.pending_approvals,(d.pending_approvals>0));
     if(d.veto!=null) setAtt('att-veto','Veto: ',d.veto?'ACTIVE':'clear',!!d.veto);
-    if(d.breaker!=null) setAtt('att-breaker','Breaker / DD: ',d.breaker,((''+d.breaker).toLowerCase().indexOf('normal')<0 && (''+d.breaker).toLowerCase().indexOf('ok')<0));
+    if(d.breaker!=null){ var _bk=(typeof d.breaker==='boolean')?(d.breaker?'TRIPPED':'NORMAL'):(''+d.breaker); setAtt('att-breaker','Breaker / DD: ',_bk,(_bk.toLowerCase().indexOf('normal')<0 && _bk.toLowerCase().indexOf('ok')<0)); }
     if(d.errors!=null) setAtt('att-errors','Errors (W0E): ',d.errors,(d.errors>0));
-    if(d.reconcile!=null) setAtt('att-recon','Reconcile: ',d.reconcile,((''+d.reconcile).toLowerCase().indexOf('match')<0 && (''+d.reconcile).toLowerCase().indexOf('ok')<0));
+    if(d.reconcile!=null){ var _rc=(typeof d.reconcile==='object')?(d.reconcile.status||'n/a'):(''+d.reconcile); var _rcAlert=(_rc.toLowerCase().indexOf('match')<0 && _rc.toLowerCase().indexOf('ok')<0 && _rc.toLowerCase().indexOf('n/a')<0); setAtt('att-recon','Reconcile: ',_rc,_rcAlert); }
     if(Array.isArray(d.options)) renderOptions(d.options);
     if(Array.isArray(d.activity)) renderActivity(d.activity);
     var u=document.getElementById('last-update'); if(u) u.textContent='Feed update: '+(d.updated||new Date().toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'2-digit',minute:'2-digit'})+' CST');
