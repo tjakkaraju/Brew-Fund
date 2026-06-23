@@ -296,36 +296,38 @@ tr:hover td{background:rgba(255,255,255,0.015);}
 <!-- TO-DO -->
 <div class="panel" id="p-todo">
   <div class="g3">
-    <div class="sc"><div class="sc-l">Open — you</div><div class="sc-v gold">5</div><div class="sc-s">unblock the system</div></div>
-    <div class="sc"><div class="sc-l">Blocked — Claude</div><div class="sc-v" style="color:var(--orange);">7</div><div class="sc-s">need n8n write tools</div></div>
-    <div class="sc"><div class="sc-l">Done recently</div><div class="sc-v up">4</div><div class="sc-s">Jun 8</div></div>
+    <div class="sc"><div class="sc-l">Open — you</div><div class="sc-v gold">4</div><div class="sc-s">your calls</div></div>
+    <div class="sc"><div class="sc-l">Building — Claude</div><div class="sc-v" style="color:var(--orange);">5</div><div class="sc-s">warm-instance work</div></div>
+    <div class="sc"><div class="sc-l">Done — Jun 18&ndash;23</div><div class="sc-v up">9</div><div class="sc-s">this stretch</div></div>
   </div>
-  <div class="sh">Your actions — these unblock everything</div>
+  <div class="sh">Your calls — these unblock the edge work</div>
   <div class="box">
-    <div class="bi"><div class="bi-n">01</div><div class="bi-body"><div class="bi-name">Create SIGNAL_LOG tab in master sheet</div><div class="bi-sub">Forward signal capture (Track B). AGENT_LOG already created.</div></div><span class="tag tg-now">NOW</span></div>
-    <div class="bi"><div class="bi-n">02</div><div class="bi-body"><div class="bi-name">Paste AGENT_LOG column headers</div><div class="bi-sub">ts_ct | agent | mode | tickers | action_flag | summary | full_text</div></div><span class="tag tg-now">NOW</span></div>
-    <div class="bi"><div class="bi-n">03</div><div class="bi-body"><div class="bi-name">Run backtest v2 on real data</div><div class="bi-sub">Laptop or Render. Check regime survival 2008 / 2020 / 2022.</div></div><span class="tag tg-next">NEXT</span></div>
-    <div class="bi"><div class="bi-n">04</div><div class="bi-body"><div class="bi-name">Upload this index.html to GitHub Pages</div><div class="bi-sub">Password-gate before going public — 506(b) solicitation caution.</div></div><span class="tag tg-next">NEXT</span></div>
-    <div class="bi"><div class="bi-n">05</div><div class="bi-body"><div class="bi-name">Decide: restore "Sharpe &gt; 6" line or keep softened</div><div class="bi-sub">Dashboard currently says "exceptional risk-adjusted returns".</div></div><span class="tag tg-todo">DECIDE</span></div>
+    <div class="bi"><div class="bi-n">01</div><div class="bi-body"><div class="bi-name">Reload dashboard + enter Alpaca key</div><div class="bi-sub">Session gate clears per browser session. After reload the LIVE POSITIONS table now populates from the feed.</div></div><span class="tag tg-now">NOW</span></div>
+    <div class="bi"><div class="bi-n">02</div><div class="bi-body"><div class="bi-name">Paste your Calendly link</div><div class="bi-sub">Drops into the Fund / School integration. Last open dashboard wiring item.</div></div><span class="tag tg-todo">DECIDE</span></div>
+    <div class="bi"><div class="bi-n">03</div><div class="bi-body"><div class="bi-name">SIP feed decision for microcap bars</div><div class="bi-sub">Free Tiingo/Stooq EOD fallback vs paid Alpaca SIP (~$9/mo). IEX is thin on microcaps; resolver needs a backstop.</div></div><span class="tag tg-todo">DECIDE</span></div>
+    <div class="bi"><div class="bi-n">04</div><div class="bi-body"><div class="bi-name">Greenlight W43 earnings-blackout veto</div><div class="bi-sub">Touches the W23C Position Sizer (money engine) &mdash; run only on a warm instance, fresh session.</div></div><span class="tag tg-next">NEXT</span></div>
   </div>
-  <div class="sh">Claude — next session (needs n8n write tools)</div>
+  <div class="sh">Claude — building (warm instance, fresh session)</div>
   <div class="box">
-    <div class="bi"><div class="bi-n">06</div><div class="bi-body"><div class="bi-name">Build secure feed webhook (dashboard ← private sheet)</div><div class="bi-sub">n8n reads the private sheet server-side, returns curated JSON. Keeps master private. Fixes Watchlist + Approvals + live NAV + the attention strip + options book.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">07</div><div class="bi-body"><div class="bi-name">Build AGENT_LOG store + LOG-OUTPUT sub-workflow</div><div class="bi-sub">Every agent appends its full output.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">08</div><div class="bi-body"><div class="bi-name">Give W23B + W10 a read-AGENT_LOG step</div><div class="bi-sub">Lets Grandmaster reason across all agents.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">09</div><div class="bi-body"><div class="bi-name">Fill-reconciliation — catch unlogged manual trades</div><div class="bi-sub">Compare Alpaca activities vs TRACK_RECORD, append any missing + flag. Feeds the Reconcile chip.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">10</div><div class="bi-body"><div class="bi-name">Fix Grandmaster Gate 4 stale W10 correlation reference</div><div class="bi-sub">In APEX-OS-Loader.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">11</div><div class="bi-body"><div class="bi-name">Wire SIGNAL_LOG capture + weekly return backfill</div><div class="bi-sub">Depends on the SIGNAL_LOG tab.</div></div><span class="tag tg-fix">BLOCKED</span></div>
-    <div class="bi"><div class="bi-n">12</div><div class="bi-body"><div class="bi-name">Fund accounting agent — LP capital accounts + HWM</div><div class="bi-sub">Shadow ledger + mgmt/perf fee + per-LP high-water mark. Architect before first wire. NOT the book of record.</div></div><span class="tag tg-fix">BLOCKED</span></div>
+    <div class="bi"><div class="bi-n">05</div><div class="bi-body"><div class="bi-name">W43 stack: universe expand &rarr; earnings-blackout veto &rarr; timing spine</div><div class="bi-sub">#2 widen universe (Alpaca book + recent SIGNAL_LOG) &rarr; #1 sizer veto blocks fresh entries into earnings prints &rarr; #3 event-timing spine.</div></div><span class="tag tg-next">NEXT</span></div>
+    <div class="bi"><div class="bi-n">06</div><div class="bi-body"><div class="bi-name">Guidance lane v2 — Claude reads the 8-K</div><div class="bi-sub">v1 phrase-matches guidance raises/cuts (live). v2 reads the filing for magnitude + false-positive filter. Front-runs the analyst revision.</div></div><span class="tag tg-next">NEXT</span></div>
+    <div class="bi"><div class="bi-n">07</div><div class="bi-body"><div class="bi-name">W80 per-position Day P&amp;L</div><div class="bi-sub">Map Alpaca unrealized_intraday_pl &rarr; pl_day so the table's Day P&amp;L column fills (currently &mdash;).</div></div><span class="tag tg-fix">SMALL</span></div>
+    <div class="bi"><div class="bi-n">08</div><div class="bi-body"><div class="bi-name">3-day return horizon in SIGNAL_LOG</div><div class="bi-sub">ret_3d column + Age Returns + Update SIGNAL_LOG. Faster per-source edge read than 5d/20d.</div></div><span class="tag tg-fix">EDGE</span></div>
+    <div class="bi"><div class="bi-n">09</div><div class="bi-body"><div class="bi-name">W5 compliance UI items</div><div class="bi-sub">Gmail IR-Replies filter (q=label:IR-Replies -from:own-domain) + Telegram veto-alert node on the VETOED branch. 506(b).</div></div><span class="tag tg-fix">UI</span></div>
   </div>
-  <div class="sh">Done recently — Jun 8</div>
+  <div class="sh">Done — Jun 18&ndash;23</div>
   <div class="box">
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W7 / W32 / W38 execution errors fixed + verified</div></div><span class="tag tg-done">DONE</span></div>
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Backtest v1 (walk-forward) + v2 (risk-discipline, 7-gate) built</div></div><span class="tag tg-done">DONE</span></div>
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Dashboard → v7.1.1, live macro bar, all stale data cleared</div></div><span class="tag tg-done">DONE</span></div>
-    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Approvals made dynamic + W23 split corrected</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Subscriptions canceled — fully on free / owned lanes</div><div class="bi-sub">Zacks + LevelFields retired. Mandate: beat them with free sources.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W_FINNHUB — free Zacks-equivalent</div><div class="bi-sub">Recommendation-trend momentum + earnings surprise (free tier).</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W_GUIDANCE v1 + W_EDGAR_8K / W_TECHSCAN catalyst lanes</div><div class="bi-sub">Front-run analyst revisions via 8-K full-text; momentum + buyback/guidance events.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">SCORECARD 1-day horizon (W52)</div><div class="bi-sub">Per-source win-rate + Sharpe in ~1 day instead of weeks.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">VIX / regime single-source (W64) — 4-band</div><div class="bi-sub">NORMAL / CAUTION / STRESS / CRISIS wired into the Position Sizer + SWARM.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W23C 429 hardening + W65 schedule staggered</div><div class="bi-sub">21 Sheets nodes retry/backoff; W65 moved off the :00/:30 collision.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Dashboard — Yahoo&rarr;Alpaca, School tab, live feed (W80) + token auth, positions table</div><div class="bi-sub">Command Center on the secure server-side feed; master sheet never exposed.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">Options + hedge stack live</div><div class="bi-sub">W68 beta hedge (SH), W69 IV-gated calls, W70 options exit.</div></div><span class="tag tg-done">DONE</span></div>
+    <div class="bi"><div class="bi-n">&#10003;</div><div class="bi-body"><div class="bi-name">W71 insider-sell short + W72 confluence scanner active</div></div><span class="tag tg-done">DONE</span></div>
   </div>
-  <div style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:6px;">Mirrors the Notion "Brew Capital — To-Do" database. Updated Jun 8, 2026.</div>
+  <div style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:6px;">Mirrors the Notion &quot;Build Tasks &mdash; Live&quot;. Updated Jun 23, 2026.</div>
 </div>
 
 <!-- APPROVALS -->
@@ -1184,6 +1186,28 @@ function setAtt(id,label,val,bad){
   el.style.borderColor = bad ? 'rgba(231,76,60,0.5)' : 'var(--border)';
   el.style.color = bad ? 'var(--red2)' : 'var(--muted2)';
 }
+function renderPositions(pos){
+  var tb=document.getElementById('positions-tbody'); if(!tb) return;
+  if(!pos || !pos.length){ tb.innerHTML='<tr><td colspan="8" class="mu" style="text-align:center;padding:18px;">No open positions.</td></tr>'; return; }
+  var h='';
+  pos.forEach(function(p){
+    var tpl=parseFloat(p.pl||0); var tplc=tpl>=0?'up':'dn';
+    var pct=(p.pl_pct!=null && p.pl_pct!=='')?(' ('+(parseFloat(p.pl_pct)>=0?'+':'')+p.pl_pct+'%)'):'';
+    var sideU=(''+(p.side||'')).toUpperCase();
+    h+='<tr>'
+      +'<td class="tk">'+(p.ticker||'')+'</td>'
+      +'<td class="mn">'+(p.mark!=null?fmt(p.mark):'')+'</td>'
+      +'<td class="mn">'+(p.qty!=null?p.qty:'')+'</td>'
+      +'<td class="mn">'+(p.avg_entry!=null?fmt(p.avg_entry):'')+'</td>'
+      +'<td class="mn">'+(p.market_value!=null?fmt(p.market_value):'')+'</td>'
+      +'<td class="mn mu">\u2014</td>'
+      +'<td class="'+tplc+'">'+(p.pl!=null?fmtPL(tpl):'')+pct+'</td>'
+      +'<td class="mn">'+sideU+'</td>'
+      +'</tr>';
+  });
+  tb.innerHTML=h;
+}
+
 function renderOptions(opts){
   var tb=document.getElementById('options-tbody'); if(!tb) return;
   if(!opts.length){ tb.innerHTML='<tr><td colspan="10" class="mu" style="text-align:center;padding:14px;">No open options.</td></tr>'; return; }
@@ -1231,6 +1255,7 @@ async function fetchFeed(){
     if(d.buying_power!=null) setEl('bp-val', fmt(d.buying_power));
     if(d.day_pl!=null){ setEl('daily-pnl', fmtPL(d.day_pl), d.day_pl>=0?'up':'dn'); setEl('port-daypnl', fmtPL(d.day_pl), d.day_pl>=0?'up':'dn'); }
     if(d.positions_count!=null){ setEl('port-count', d.positions_count+' positions'); setEl('port-positions', d.positions_count); }
+    if(Array.isArray(d.positions)) renderPositions(d.positions);
     if(d.pending_approvals!=null) setAtt('att-approvals','Approvals: ',d.pending_approvals,(d.pending_approvals>0));
     if(d.veto!=null) setAtt('att-veto','Veto: ',d.veto?'ACTIVE':'clear',!!d.veto);
     if(d.breaker!=null){ var _bk=(typeof d.breaker==='boolean')?(d.breaker?'TRIPPED':'NORMAL'):(''+d.breaker); setAtt('att-breaker','Breaker / DD: ',_bk,(_bk.toLowerCase().indexOf('normal')<0 && _bk.toLowerCase().indexOf('ok')<0)); }
