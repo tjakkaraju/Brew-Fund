@@ -284,7 +284,7 @@ tr:hover td{background:rgba(255,255,255,0.015);}
     <div class="wf"><div class="wf-n">W74</div><div class="wf-name">Concentration Sentinel</div><span class="tag tg-live">LIVE</span></div>
     <div class="wf"><div class="wf-n">W75</div><div class="wf-name">Watchdog / Heartbeat</div><span class="tag tg-live">LIVE</span></div>
     <div class="wf"><div class="wf-n">W0E</div><div class="wf-name">Global Error Alarm</div><span class="tag tg-live">LIVE</span></div>
-    <div class="wf"><div class="wf-n">W71</div><div class="wf-name">Insider-Sell Short</div><span class="tag tg-todo">INACTIVE</span></div>
+    <div class="wf"><div class="wf-n">W71</div><div class="wf-name">Insider-Sell Short</div><span class="tag tg-live">LIVE</span></div>
     <div class="wf"><div class="wf-n">W43</div><div class="wf-name">Earnings (Finnhub)</div><span class="tag tg-todo">READY — TOGGLE ON</span></div>
     <div class="wf"><div class="wf-n">W19</div><div class="wf-name">LinkedIn Intel</div><span class="tag tg-todo">NOT BUILT</span></div>
     <div class="wf"><div class="wf-n">W20</div><div class="wf-name">7-Touch</div><span class="tag tg-todo">NOT BUILT</span></div>
@@ -734,7 +734,7 @@ function sw(panelId, tabId) {
 // ═══ ALPACA LIVE DATA (used when no secure feed is set; key entered at the unlock gate) ═══
 var AK='', ALPK='', ALPS='';
 var refreshInterval = null;
-var FEED_WEBHOOK = 'https://brew-capital-n8n.onrender.com/webhook/dashboard-feed?token=421bffb6670224d4563656be838bdb32'; // n8n webhook that reads the PRIVATE master sheet + Alpaca server-side and returns curated JSON. Set this to go fully live. Empty = secure feed not yet connected.
+var FEED_WEBHOOK = 'https://brew-capital-n8n.onrender.com/webhook/dashboard-feed?token=bc7f3e92a1d84c06b5e29f74103da8e6'; // n8n webhook that reads the PRIVATE master sheet + Alpaca server-side and returns curated JSON. Set this to go fully live. Empty = secure feed not yet connected.
 
 function getAlpacaHeaders() {
   return {'APCA-API-KEY-ID': ALPK, 'APCA-API-SECRET-KEY': ALPS};
